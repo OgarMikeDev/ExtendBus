@@ -9,9 +9,9 @@ public class Bus {
     /*
     Расход топлива
     на 1 км.
-    100% - 1
-    10% - 0.100
-    1% - 0.010
+    95 - 100%
+    9,5 - 10%
+    0,95 - 1%
     Условно, если бак заполнен на 100% (единица), а расход —
     0,01, бака хватит на 100 км
     0,010 * x = 1
@@ -69,7 +69,7 @@ public class Bus {
         больше чем на 100%,
         он заполнится только до 100%
          */
-        tankFullnessRate = totalTankRate > 1 ? 1 : totalTankRate;
+        tankFullnessRate = totalTankRate > 95 ? 95 : totalTankRate;
     }
     public double getTankFullnessRate() {
         return tankFullnessRate;
