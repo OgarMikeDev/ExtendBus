@@ -30,7 +30,15 @@ public class Bus {
     //Проезд автобуса на определённое расстояние в км
     public boolean run(int distance) {
         //Проверка наличия бензина для отправки
-        if (consumptionRate * distance > tankFullnessRate) {
+//        if (consumptionRate * distance > tankFullnessRate) {
+//            return false;
+//        }
+        /*
+        Проверка того,
+        сможем ли мы
+        пройти указанное расстояние в км
+         */
+        if (powerReserve() < distance) {
             return false;
         }
         /*
@@ -40,6 +48,13 @@ public class Bus {
          */
         tankFullnessRate -= consumptionRate * distance;
         return true;
+    }
+    /*
+    На сколько км
+    хватит оставшегося топлива
+     */
+    public int powerReserve() {
+        return (int) (tankFullnessRate / consumptionRate);
     }
     //Заправка автобуса
     public void refuel(double tankRate) {
@@ -55,7 +70,6 @@ public class Bus {
          */
         tankFullnessRate = totalTankRate > 1 ? 1 : totalTankRate;
     }
-
     public double getTankFullnessRate() {
         return tankFullnessRate;
     }
