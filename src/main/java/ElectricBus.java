@@ -1,6 +1,11 @@
 public class ElectricBus extends Bus {
-    //Минимальная степень наполнения резервуара
+    /*
+    Минимальное кол-во единиц электричества
+    для движения электробуса -
+    10% от максимального
+     */
     private final double minimalTankFullnessRate;
+
     public ElectricBus(double consumptionRate, double minimalTankFullnessRate) {
         super(consumptionRate);
         this.minimalTankFullnessRate = minimalTankFullnessRate;
@@ -8,12 +13,29 @@ public class ElectricBus extends Bus {
 
     @Override
     public boolean run(int distance) {
-        if (powerReserve() < distance) {
+        /*
+        Проверка того,
+        сможем ли мы
+        пройти указанное расстояние в км
+         */
+        if (drivingDistance() < distance) {
             return false;
         }
+
+        /*
+        Проверка того,
+        что в электробусе есть
+        10% заряда
+         */
         if (tankFullnessRate < minimalTankFullnessRate) {
             return false;
         }
+
+        /*
+        Вычитаем из топливноо бака
+        кол-во литров
+        на заданную дистанцию
+         */
         tankFullnessRate -= consumptionRate * distance;
         return true;
     }
