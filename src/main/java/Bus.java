@@ -16,6 +16,7 @@ public class Bus {
     0,01, бака хватит на 100 км
     0,010 * x = 1
     x = 1 / 0.01
+    x = 100
      */
     private final double consumptionRate;
 
