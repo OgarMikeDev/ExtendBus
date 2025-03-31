@@ -4,7 +4,7 @@ public class Bus {
     топливный бак
     (от 0 до 1)
      */
-    private double tankFullnessRate;
+    protected double tankFullnessRate;
 
     /*
     Расход топлива
@@ -18,7 +18,7 @@ public class Bus {
     x = 1 / 0.01
     x = 100
      */
-    private final double consumptionRate;
+    protected final double consumptionRate;
 
     //Кол-во автобусов
     private static int countBuses = 0;
