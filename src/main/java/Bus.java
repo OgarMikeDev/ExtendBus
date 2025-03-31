@@ -9,6 +9,9 @@ public class Bus {
     /*
     Расход топлива
     на 1 км.
+    100% - 1
+    10% - 0.100
+    1% - 0.010
     Условно, если бак заполнен на 100% (единица), а расход —
     0,01, бака хватит на 100 км
     0,010 * x = 1
@@ -63,5 +66,17 @@ public class Bus {
 
     public static int getCountBuses() {
         return countBuses;
+    }
+
+    public static void setCountBuses(int countBuses) {
+        Bus.countBuses = countBuses;
+    }
+
+    @Override
+    public String toString() {
+        return "Bus{" +
+                "tankFullnessRate=" + tankFullnessRate +
+                ", consumptionRate=" + consumptionRate +
+                '}';
     }
 }
