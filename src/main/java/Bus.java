@@ -1,19 +1,20 @@
 public class Bus {
     /*
-    Насколько заполнен бак
+    Насколько заполнен
     топливный бак
-    (от 0 до 1)
+    (от 0 до 95)
      */
     protected double tankFullnessRate;
 
     /*
-    Расход топлива
-    на 1 км.
+    Расход топлива на 1 км
     95 - 100%
     9,5 - 10%
     0,95 - 1%
-    Условно, если бак заполнен на 100% (95), а расход —
-    0,300 бака хватит на 316 км
+    Услово, если бак заполнен на 100%(95),
+    а расход - 0,300,
+    то кол-ва литров в баке
+    хватит на 316 км
     0,300 * x = 95
     x = 95 / 0,300
     x = 316
@@ -28,49 +29,52 @@ public class Bus {
         countBuses++;
     }
 
-    //Проезд автобуса на определённое расстояние в км
-    public boolean run(int distance) {
-        //Проверка наличия бензина для отправки
-//        if (consumptionRate * distance > tankFullnessRate) {
-//            return false;
-//        }
-        /*
-        Проверка того,
-        сможем ли мы
-        пройти указанное расстояние в км
-         */
-        if (powerReserve() < distance) {
-            return false;
-        }
-        /*
-        Вычитаем из топливного бака
-        кол-во литров на
-        заданную дистанцию
-         */
-        tankFullnessRate -= consumptionRate * distance;
-        return true;
-    }
     /*
     На сколько км
     хватит оставшегося топлива
      */
-    public int powerReserve() {
+    public int drivingDistance() {
         return (int) (tankFullnessRate / consumptionRate);
     }
-    //Заправка автобуса
-    public void refuel(double tankRate) {
+
+    /*
+    Заправка автобуса
+     */
+    public void refuel(double countLiters) {
         /*
         На сколько заполнен топливный бак
-        + кол-во доливаемого бензина
+        + кол-во довалиемого бензина
          */
-        double totalTankRate = tankFullnessRate + tankRate;
+        double totalFuel = tankFullnessRate + countLiters;
+
         /*
         Если попытаться заполнить бак
         больше чем на 100%,
         он заполнится только до 100%
          */
-        tankFullnessRate = totalTankRate > 95 ? 95 : totalTankRate;
+        tankFullnessRate = totalFuel > 95 ? 95 : totalFuel;
     }
+
+    //Проезд автобуса на определённое расстояние в км
+    public boolean run(int distance) {
+        /*
+        Проверка того,
+        сможем ли мы
+        пройти указанное расстояние в км
+         */
+        if (drivingDistance() < distance) {
+            return false;
+        }
+
+        /*
+        Вычитаем из топливноо бака
+        кол-во литров
+        на заданную дистанцию
+         */
+        tankFullnessRate -= consumptionRate * distance;
+        return true;
+    }
+
     public double getTankFullnessRate() {
         return tankFullnessRate;
     }
@@ -81,10 +85,6 @@ public class Bus {
 
     public static int getCountBuses() {
         return countBuses;
-    }
-
-    public static void setCountBuses(int countBuses) {
-        Bus.countBuses = countBuses;
     }
 
     @Override
