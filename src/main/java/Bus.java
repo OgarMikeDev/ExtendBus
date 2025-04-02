@@ -22,11 +22,11 @@ public class Bus {
     protected final double consumptionRate;
 
     //Кол-во автобусов
-    private static int countBuses = 0;
+    private static int count = 0;
 
     public Bus(double consumptionRate) {
         this.consumptionRate = consumptionRate;
-        countBuses++;
+        count++;
     }
 
     /*
@@ -40,7 +40,7 @@ public class Bus {
     /*
     Заправка автобуса
      */
-    public void refuel(double countLiters) {
+    public final void refuel(double countLiters) {
         /*
         На сколько заполнен топливный бак
         + кол-во довалиемого бензина
@@ -83,8 +83,8 @@ public class Bus {
         return consumptionRate;
     }
 
-    public static int getCountBuses() {
-        return countBuses;
+    public static int getCount() {
+        return count;
     }
 
     @Override

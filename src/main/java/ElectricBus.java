@@ -6,9 +6,17 @@ public class ElectricBus extends Bus {
      */
     private final double minimalTankFullnessRate;
 
+    //Кол-во электробусов
+    private static int count = 0;
+
     public ElectricBus(double consumptionRate, double minimalTankFullnessRate) {
         super(consumptionRate);
         this.minimalTankFullnessRate = minimalTankFullnessRate;
+        count++;
+    }
+
+    public static int getCount() {
+        return count;
     }
 
     @Override
@@ -35,5 +43,9 @@ public class ElectricBus extends Bus {
         кот-е мы можем расходовать
          */
         return (int) (remainderBatteryFullness / consumptionRate);
+    }
+
+    public double getMinimalTankFullnessRate() {
+        return minimalTankFullnessRate;
     }
 }
