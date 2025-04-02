@@ -12,31 +12,28 @@ public class ElectricBus extends Bus {
     }
 
     @Override
-    public boolean run(int distance) {
+    public int drivingDistance() {
         /*
-        Проверка того,
-        сможем ли мы
-        пройти указанное расстояние в км
+        95 - максимальный заряд
+        10% - 9.5 - минимальный порог
+        Расстояние рассчитывается исходя из
+        90%, т.е. 85.5
          */
-        if (drivingDistance() < distance) {
-            return false;
+        double remainderBatteryFullness = tankFullnessRate - minimalTankFullnessRate;
+        /*
+        Если заряда меньше,
+        либо равно минимальному,
+        то мы можем проехать 0 км
+         */
+        if (remainderBatteryFullness <= 0) {
+            return 0;
         }
 
         /*
-        Проверка того,
-        что в электробусе есть
-        10% заряда
+        Считаем расстояние,
+        исходя из того кол-ва заряда,
+        кот-е мы можем расходовать
          */
-        if (tankFullnessRate < minimalTankFullnessRate) {
-            return false;
-        }
-
-        /*
-        Вычитаем из топливноо бака
-        кол-во литров
-        на заданную дистанцию
-         */
-        tankFullnessRate -= consumptionRate * distance;
-        return true;
+        return (int) (remainderBatteryFullness / consumptionRate);
     }
 }
