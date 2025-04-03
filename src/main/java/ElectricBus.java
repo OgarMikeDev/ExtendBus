@@ -1,4 +1,11 @@
 public class ElectricBus extends Bus {
+    //Скорость потребления электричества
+    private static final double degradationRate = 0.010;
+
+    //Шаг для увеличения потребления энергии
+    private static final double minRateToDegrade = 0.1;
+
+
     /*
     Минимальное кол-во единиц электричества
     для движения электробуса -
@@ -47,5 +54,12 @@ public class ElectricBus extends Bus {
 
     public double getMinimalTankFullnessRate() {
         return minimalTankFullnessRate;
+    }
+
+    @Override
+    public void refuel(double countCharge) {
+        int countSteps = (int) ((95 - tankFullnessRate) / minRateToDegrade);
+        consumptionRate = countSteps * degradationRate;
+        super.refuel(countCharge);
     }
 }

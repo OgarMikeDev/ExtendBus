@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Bus {
     /*
     Насколько заполнен
@@ -19,7 +21,7 @@ public class Bus {
     x = 95 / 0,300
     x = 316
      */
-    protected final double consumptionRate;
+    protected double consumptionRate;
 
     //Кол-во автобусов
     private static int count = 0;
@@ -40,7 +42,7 @@ public class Bus {
     /*
     Заправка автобуса
      */
-    public final void refuel(double countLiters) {
+    public void refuel(double countLiters) {
         /*
         На сколько заполнен топливный бак
         + кол-во довалиемого бензина
@@ -85,6 +87,18 @@ public class Bus {
 
     public static int getCount() {
         return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || this.getClass() != o.getClass()) return false;
+        Bus bus = (Bus) o;
+        return Double.compare(this.tankFullnessRate, bus.tankFullnessRate) == 0 && Double.compare(consumptionRate, bus.consumptionRate) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tankFullnessRate, consumptionRate);
     }
 
     @Override
